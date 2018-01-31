@@ -36,24 +36,22 @@ export class MediaService {
           localStorage.setItem('token', response['token']);
           this.router.navigate(['front']);
         }, (error: HttpErrorResponse) => {
-          this.status = error.statusText;
+          console.log(error.error.message);
+          this.status = error.error.message;
         });
   }
 
-  getUserInfo() {
+  register(user) {
+    return this.http.post(this.apiUrl + '/users', user);
+  }
+
+  getUserData() {
     const settings = {
       headers: new HttpHeaders().set('x-access-token',
           localStorage.getItem('token')),
     };
-    this.http.get(this.apiUrl + '/users/user', settings).
-        subscribe(response => {
-          console.log(response);
-          localStorage.setItem('user', JSON.stringify(response));
-          this.router.navigate(['front']);
-        }, (error: HttpErrorResponse) => {
-          this.status = error.statusText;
-          this.router.navigate(['login']);
-        });
+    return this.http.get(this.apiUrl + '/users/user', settings);
+
   }
 
 }
