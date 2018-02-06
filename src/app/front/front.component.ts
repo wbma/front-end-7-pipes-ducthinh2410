@@ -10,6 +10,10 @@ import {Router} from '@angular/router';
 })
 export class FrontComponent implements OnInit {
 
+  title = '';
+  description = '';
+  file: File;
+
   constructor(private mediaService: MediaService, private router: Router) {
   }
 
@@ -26,4 +30,20 @@ export class FrontComponent implements OnInit {
     }
   }
 
+  setFile(event) {
+    this.file = event.target.files[0];
+  }
+
+  upload() {
+    const formData = new FormData();
+    formData.append('file', this.file);
+    formData.append('title', this.title);
+    formData.append('description', this.description);
+
+    this.mediaService.upload(formData).subscribe(data => {
+      console.log(data);
+    },(e:HttpErrorResponse) => {
+      console.log(e);
+    });
+  }
 }
