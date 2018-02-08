@@ -61,4 +61,11 @@ export class MediaService {
     return this.http.post(this.apiUrl + '/media', formData, settings);
   }
 
+  getNewFiles() {
+    const start = 0;
+    const limit = 10;
+
+    return this.http.get(this.apiUrl + `/media?start=${start}&limit=${limit}`)
+  }
+
 }

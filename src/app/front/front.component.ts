@@ -13,11 +13,14 @@ export class FrontComponent implements OnInit {
   title = '';
   description = '';
   file: File;
+  mediaFiles: any;
 
   constructor(private mediaService: MediaService, private router: Router) {
   }
 
   ngOnInit() {
+
+    // Auth Guard
     if (localStorage.getItem('token') !== null) {
       this.mediaService.getUserData().subscribe(response => {
         console.log('Welcome ' + response['full_name']);
@@ -28,6 +31,12 @@ export class FrontComponent implements OnInit {
     } else {
       this.router.navigate(['login']);
     }
+
+    // Query media files
+    this.mediaService.getNewFiles().subscribe(res => {
+      this.mediaFiles = res;
+      console.log(this.mediaFiles);
+  });
   }
 
   setFile(event) {
