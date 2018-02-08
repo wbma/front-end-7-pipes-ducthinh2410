@@ -12,6 +12,7 @@ import {LogoutComponent} from './logout/logout.component';
 import {FormsModule} from '@angular/forms';
 import {MediaService} from './services/media.service';
 import {HttpClientModule} from '@angular/common/http';
+import { ThumbnailPipe } from './pipes/thumbnail.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    ThumbnailPipe,
   ],
   imports: [
     BrowserModule,
